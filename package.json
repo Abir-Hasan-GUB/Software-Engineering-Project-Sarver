@@ -1,0 +1,11 @@
+{
+  "name": "software-engineering-project-sarver",
+  "version": "1.0.0",
+  "description": "\"Software Engineering Backend\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "abir",
+  "license": "MIT"
+}
