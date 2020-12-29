@@ -2,6 +2,7 @@ const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const ObjectId = require('mongodb').ObjectID;
 const cors = require('cors');
 require('dotenv').config();
 
@@ -105,6 +106,14 @@ client.connect(err => {
             .toArray((err, documents) => {
                 res.send(documents);//load item
             })
+    })
+
+    // ================= Delete an Review from admin panel =================
+    app.delete('/deleteOneReview/:id', (req, res) => {
+        reviewsCollection.deleteOne({_id: ObjectId(req.params.id)})
+        .then(results =>{
+            res.send(results);
+        })
     })
 
 
