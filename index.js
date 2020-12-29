@@ -123,7 +123,24 @@ client.connect(err => {
             })
     })
 
+    // ================= Update an status by admin =================
+    app.patch('/updateStatus/:id', (req, res) => {
+        orderCollection.updateOne({ _id: ObjectId(req.params.id) },
+            {
+                $set: { status: req.body.updateStatus }
+            })
+            .then(results => {
+                res.send(results)
+            })
+    });
+
+
 });
+
+
+
+
+
 
 
 
