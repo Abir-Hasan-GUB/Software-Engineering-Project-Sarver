@@ -110,12 +110,18 @@ client.connect(err => {
 
     // ================= Delete an Review from admin panel =================
     app.delete('/deleteOneReview/:id', (req, res) => {
-        reviewsCollection.deleteOne({_id: ObjectId(req.params.id)})
-        .then(results =>{
-            res.send(results);
-        })
+        reviewsCollection.deleteOne({ _id: ObjectId(req.params.id) })
+            .then(results => {
+                res.send(results);
+            })
     })
-
+    // ================= Delete an order by user =================
+    app.delete('/deleteOneOrder/:id', (req, res) => {
+        orderCollection.deleteOne({ _id: ObjectId(req.params.id) })
+            .then(results => {
+                res.send(results);
+            })
+    })
 
 });
 
