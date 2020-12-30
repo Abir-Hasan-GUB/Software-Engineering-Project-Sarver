@@ -86,6 +86,7 @@ client.connect(err => {
     app.post("/addOrder", (req, res) => {
         const order = req.body;
         // console.log(order)
+        // console.log(req.body.date)
         orderCollection.insertOne(order)
             .then(result => {
                 res.send(result)
@@ -134,6 +135,28 @@ client.connect(err => {
             })
     });
 
+    // ================= Update an status by admin =================
+    app.patch('/updateProductInformation/:id', (req, res) => {
+        productsCollection.updateOne({ _id: ObjectId(req.params.id) },
+            {
+                $set: { price: req.body.newPrice, stock: req.body.newStock }
+            })
+            .then(results => {
+                // console.log(results)
+                res.send(results)
+            })
+    });
+
+    // ================= display date wise order and sell =================
+    app.post('/orderByDate', (req, res) => {
+        const { curentDate } = req.body;
+        //   console.log(curentDate);
+        orderCollection.find({ date: curentDate }) // find using date
+            .toArray((err, documents) => {
+                //   console.log(documents)
+                res.send(documents)
+            })
+    });
 
 });
 
