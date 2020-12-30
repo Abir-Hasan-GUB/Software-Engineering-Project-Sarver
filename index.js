@@ -21,6 +21,7 @@ client.connect(err => {
     const productsCollection = client.db("se-creative-agency").collection("products");
     const reviewsCollection = client.db("se-creative-agency").collection("review");
     const orderCollection = client.db("se-creative-agency").collection("orders");
+    const adminCollection = client.db("se-creative-agency").collection("admin");
 
     // ================ Add a single product to the collection =================
     app.post("/addProdcuct", (req, res) => {
@@ -157,6 +158,20 @@ client.connect(err => {
                 res.send(documents)
             })
     });
+
+
+     // ================ Make admin to admin collection =================
+     app.post("/makeAdmin", (req, res) => {
+        const admin = req.body;
+        console.log(admin)
+        // console.log(req.body.date)
+        adminCollection.insertOne(admin)
+            .then(result => {
+                res.send(result)
+            })
+    })
+
+
 
 });
 
