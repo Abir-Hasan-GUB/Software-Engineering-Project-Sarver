@@ -163,7 +163,7 @@ client.connect(err => {
      // ================ Make admin to admin collection =================
      app.post("/makeAdmin", (req, res) => {
         const admin = req.body;
-        console.log(admin)
+        // console.log(admin)
         // console.log(req.body.date)
         adminCollection.insertOne(admin)
             .then(result => {
@@ -171,6 +171,13 @@ client.connect(err => {
             })
     })
 
+// ================= Find Admin Using email for login verification =================
+app.get('/findAdmin/', (req, res) => {
+    adminCollection.find({ role: req.query.role })
+        .toArray((err, documents) => {
+            res.send(documents);//load item
+        })
+})
 
 
 });
