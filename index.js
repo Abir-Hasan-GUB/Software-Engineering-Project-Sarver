@@ -25,10 +25,10 @@ client.connect(err => {
     // ================ Add a single product to the collection =================
     app.post("/addProdcuct", (req, res) => {
         const product = req.body;
+        // console.log(product);
         productsCollection.insertOne(product)
             .then(result => {
-                console.log(result.insertedCount)
-                res.send(result.insertedCount)
+                res.send(result)
             })
     })
 
