@@ -35,7 +35,8 @@ client.connect(err => {
 
     // ================= Load all products =================
     app.get('/products', (req, res) => {
-        productsCollection.find({})
+        const search = req.query.search; // recive search parameters
+        productsCollection.find({name: {$regex: search, $options:"$i"}})//search with case insensative
             .toArray((err, documents) => {
                 res.send(documents);
             })
