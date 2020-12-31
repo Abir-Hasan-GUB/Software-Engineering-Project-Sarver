@@ -141,6 +141,21 @@ client.connect(err => {
                 res.send(results);
             })
     })
+    // ================= Load All Admin =================
+    app.get('/allAdmin', (req, res) => {
+        adminCollection.find({})
+            .toArray((err, documents) => {
+                res.send(documents);
+            })
+    })
+    // ================= Delete an Admin by Super Admin =================
+    app.delete('/deleteOneAdmin/:id', (req, res) => {
+        adminCollection.deleteOne({ _id: ObjectId(req.params.id) })
+            .then(results => {
+                // console.log(results);
+                res.send(results);
+            })
+    })
 
     // ================= Update an status by admin =================
     app.patch('/updateStatus/:id', (req, res) => {
