@@ -133,6 +133,14 @@ client.connect(err => {
                 res.send(results);
             })
     })
+    // ================= Delete an Product by Admin =================
+    app.delete('/deleteOneProduct/:id', (req, res) => {
+        productsCollection.deleteOne({ _id: ObjectId(req.params.id) })
+            .then(results => {
+                // console.log(results);
+                res.send(results);
+            })
+    })
 
     // ================= Update an status by admin =================
     app.patch('/updateStatus/:id', (req, res) => {
