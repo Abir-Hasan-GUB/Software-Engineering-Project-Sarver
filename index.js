@@ -191,16 +191,9 @@ client.connect(err => {
 
 });
 
-
-
-
-
-
-
-
-console.log("\n\nYeaahh Database Connected !!!!\n\n")
+// console.log("\n\nYeaahh Database Connected !!!!\n\n")
 app.get('/', (req, res) => {
     res.send('Listen form mongodb')
 })
 
-app.listen(port)
+app.listen(port.env.PORT || port)
