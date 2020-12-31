@@ -33,10 +33,18 @@ client.connect(err => {
             })
     })
 
-    // ================= Load all products =================
+    // ================= Search into all products =================
     app.get('/products', (req, res) => {
         const search = req.query.search; // recive search parameters
-        productsCollection.find({name: {$regex: search, $options:"$i"}})//search with case insensative
+        productsCollection.find({ name: { $regex: search, $options: "$i" } })//search with case insensative
+            .toArray((err, documents) => {
+                res.send(documents);
+            })
+    })
+
+    // ================= Load all products =================
+    app.get('/Allproducts', (req, res) => {
+        productsCollection.find({})//search with case insensative
             .toArray((err, documents) => {
                 res.send(documents);
             })
@@ -161,8 +169,8 @@ client.connect(err => {
     });
 
 
-     // ================ Make admin to admin collection =================
-     app.post("/makeAdmin", (req, res) => {
+    // ================ Make admin to admin collection =================
+    app.post("/makeAdmin", (req, res) => {
         const admin = req.body;
         // console.log(admin)
         // console.log(req.body.date)
@@ -172,13 +180,13 @@ client.connect(err => {
             })
     })
 
-// ================= Find Admin Using email for login verification =================
-app.get('/findAdmin/', (req, res) => {
-    adminCollection.find({ role: req.query.role })
-        .toArray((err, documents) => {
-            res.send(documents);//load item
-        })
-})
+    // ================= Find Admin Using email for login verification =================
+    app.get('/findAdmin/', (req, res) => {
+        adminCollection.find({ role: req.query.role })
+            .toArray((err, documents) => {
+                res.send(documents);//load item
+            })
+    })
 
 
 });
