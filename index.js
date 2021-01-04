@@ -70,6 +70,7 @@ client.connect(err => {
     // ================ Add a review to the collection =================
     app.post("/addReview", (req, res) => {
         const review = req.body;
+        // console.log(review)
         reviewsCollection.insertOne(review)
             .then(result => {
                 res.send(result)
